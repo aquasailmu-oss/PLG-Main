@@ -1,0 +1,753 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PrimaLuxGo Illustration Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+SC:wght@500;600&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: one centred column of plates. Each plate is a framed engraving with a caption saying where it is used on the site. */
+:root {
+  --paper: #F7F1E6;
+  --surface: #FFFDF8;
+  --ink: #0A1F2B;
+  --reef: #0E5A6E;
+  --aqua: #5CC3C0;
+  --glass: #CDE8E4;
+  --sand: #EFE6D6;
+  --gold: #C8A25B;
+  --gold-ink: #8A6A2A;
+  --rule: #D9CDB5;
+  --muted: #3E5A66;
+  --script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --caps: 'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 1.12rem; line-height: 1.5; padding-inline: 16px; padding-block: 0 64px; }
+.wrap { max-width: 1040px; margin-inline: auto; display: grid; gap: 56px; }
+
+.top { text-align: center; padding: 52px 16px 40px; margin-inline: -16px; border-bottom: 3px double var(--gold); }
+.top .t1 { font-family: var(--script); font-size: clamp(2.8rem, 9vw, 4.6rem); line-height: 1.1; color: var(--reef); margin: 0; }
+.top .t2 { font-family: var(--caps); font-weight: 600; letter-spacing: .32em; font-size: .9rem; color: var(--gold-ink); margin: 6px 0 0; padding-left: .32em; }
+.top p.lead { max-width: 60ch; margin: 22px auto 0; color: var(--muted); }
+
+.sec { display: grid; gap: 18px; min-width: 0; }
+.sec h2 { margin: 0; font-family: var(--caps); font-weight: 600; letter-spacing: .2em; font-size: 1rem; color: var(--ink); text-transform: uppercase; }
+.sec .use { margin: 0; color: var(--muted); max-width: 70ch; }
+.plate { background: var(--surface); border: 1px solid var(--rule); outline: 1px solid var(--gold); outline-offset: -7px; padding: clamp(16px, 3vw, 28px); min-width: 0; }
+.plate svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.grid .plate { display: grid; gap: 10px; justify-items: center; align-content: start; }
+.grid .plate svg { max-width: 220px; }
+.cap { font-family: var(--caps); font-weight: 600; letter-spacing: .22em; font-size: .78rem; text-transform: uppercase; text-align: center; margin: 0; padding-left: .22em; }
+.cap small { display: block; font-family: var(--serif); font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 1rem; color: var(--muted); margin-top: 2px; }
+
+/* drawing vocabulary: navy line, gold accent, paper fills */
+.l { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.t { fill: none; stroke: var(--ink); stroke-width: .8; stroke-linecap: round; stroke-linejoin: round; }
+.g { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.r { fill: none; stroke: var(--reef); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.fi { fill: var(--ink); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.fg { fill: var(--gold); stroke: var(--gold-ink); stroke-width: 1; stroke-linejoin: round; }
+.fp { fill: var(--surface); stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.fs { fill: var(--glass); stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.dash { stroke-dasharray: 2 6; }
+.dash2 { stroke-dasharray: 7 5; }
+.lab { font-family: var(--caps); font-weight: 600; font-size: 11px; letter-spacing: .16em; fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.scr { font-family: var(--script); fill: var(--reef); }
+.sc { font-family: var(--caps); font-weight: 600; letter-spacing: .2em; fill: var(--ink); }
+
+/* line drawing animation (plate 9) */
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.8s ease-out forwards; }
+.draw.d2 { animation-delay: .5s; }
+.draw.d3 { animation-delay: 1.1s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.replay { font-family: var(--caps); font-weight: 600; letter-spacing: .22em; font-size: .8rem; text-transform: uppercase; background: var(--reef); color: var(--paper); border: 1px solid var(--reef); padding: 10px 22px; cursor: pointer; justify-self: center; margin-top: 8px; }
+.replay:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .draw { animation: none; stroke-dashoffset: 0; } }
+.two { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.two .plate svg { max-width: 460px; margin-inline: auto; }
+.foot { text-align: center; color: var(--muted); font-size: 1rem; margin: 0; }
+
+/* wildlife animation */
+.grid.anim { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid.anim .plate svg { max-width: 100%; }
+.leg-note { display: none; }
+.legp { fill: none; stroke: var(--gold-ink); stroke-width: 4.5; stroke-linecap: round; }
+.toe { fill: none; stroke: var(--gold-ink); stroke-width: 2.6; stroke-linecap: round; }
+.wing { animation: wing .85s ease-in-out infinite alternate; }
+.wing.far { animation-delay: -.08s; }
+@keyframes wing { from { transform: rotate(8deg); } to { transform: rotate(-92deg); } }
+.bob { animation: bob .85s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(4px); } to { transform: translateY(-6px); } }
+.tailsw { animation: tailsw 1.7s ease-in-out infinite alternate; }
+@keyframes tailsw { from { transform: rotate(-3deg); } to { transform: rotate(4deg); } }
+.cloud { animation: cloud 11s ease-in-out infinite alternate; }
+.cloud.slow { animation-duration: 17s; }
+@keyframes cloud { from { transform: translateX(0); } to { transform: translateX(-26px); } }
+.waves { animation: waves 2.6s linear infinite; }
+@keyframes waves { from { transform: translateX(0); } to { transform: translateX(-40px); } }
+.ground { animation: ground 1.8s linear infinite; }
+@keyframes ground { from { transform: translateX(0); } to { transform: translateX(-60px); } }
+.step.a { animation: step .9s ease-in-out infinite alternate; }
+.step.b { animation: step .9s ease-in-out infinite alternate-reverse; }
+@keyframes step { from { transform: rotate(-22deg); } to { transform: rotate(22deg); } }
+.dbob { animation: dbob .9s ease-in-out infinite alternate; }
+@keyframes dbob { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+.dhead { animation: dhead 1.8s ease-in-out infinite; }
+@keyframes dhead { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(7px); } }
+.tleg.f { animation: tstep 4s ease-in-out infinite alternate; }
+.tleg.b { animation: tstep 4s ease-in-out infinite alternate-reverse; }
+@keyframes tstep { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+.reach { animation: reach 5s ease-in-out infinite; }
+@keyframes reach { 0%, 100% { transform: translate(0, 0); } 35%, 70% { transform: translate(12px, 12px); } }
+.jaw { animation: chew .45s ease-in-out infinite alternate; }
+@keyframes chew { from { transform: rotate(0); } to { transform: rotate(14deg); } }
+.peck { animation: peck 2.6s ease-in-out infinite; }
+@keyframes peck { 0%, 50%, 100% { transform: translate(0, 0) rotate(0); } 60%, 66% { transform: translate(10px, 10px) rotate(70deg); } 72% { transform: translate(0, 0) rotate(0); } 80% { transform: translate(10px, 10px) rotate(70deg); } 86% { transform: translate(0, 0) rotate(0); } }
+#wildlife.paused * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .wing, .bob, .tailsw, .cloud, .waves, .ground, .step, .dbob, .dhead, .tleg, .reach, .jaw, .peck { animation: none; } }
+</style>
+
+<!-- shared drawing parts -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="isle" d="M403.3 81.2 L399.1 79.5 L394.1 79.1 L390.7 75.8 L387.3 77.0 L382.7 77.0 L377.7 72.4 L377.2 69.5 L376.0 68.2 L365.1 64.0 L360.9 66.1 L353.7 67.4 L347.4 72.8 L344.9 78.3 L341.1 78.3 L333.1 74.9 L330.2 76.2 L331.5 85.8 L325.2 97.6 L323.1 99.7 L315.9 102.6 L314.2 104.3 L310.1 115.7 L310.1 124.9 L306.3 127.8 L305.4 129.9 L306.3 132.5 L310.5 137.5 L310.5 140.9 L302.5 143.8 L297.0 150.9 L297.0 155.1 L299.1 158.9 L302.5 161.9 L302.9 166.1 L299.1 166.5 L294.5 164.8 L287.8 171.5 L286.5 174.9 L282.8 174.9 L278.6 173.2 L258.0 180.8 L242.4 194.2 L241.2 203.9 L236.1 205.5 L232.4 208.9 L226.5 222.8 L226.5 230.3 L218.5 243.3 L216.0 249.6 L217.2 263.5 L223.9 270.2 L223.9 273.6 L219.8 275.7 L216.8 278.6 L214.3 288.7 L214.7 291.2 L217.7 295.4 L217.7 299.6 L214.7 306.3 L219.3 315.6 L219.3 319.4 L216.8 322.3 L213.0 333.6 L205.1 342.9 L197.1 342.5 L193.7 338.7 L191.6 339.5 L182.8 359.3 L184.9 361.8 L187.8 361.8 L191.6 357.6 L199.6 358.0 L201.7 359.7 L209.2 372.7 L212.2 374.0 L218.9 374.4 L220.2 376.1 L231.9 381.5 L242.4 388.2 L250.4 390.3 L255.4 390.3 L258.4 389.1 L262.2 385.3 L265.5 385.3 L279.4 394.1 L282.3 395.0 L292.0 394.1 L296.6 396.6 L302.5 396.6 L308.4 400.0 L319.3 396.6 L325.2 393.3 L339.0 392.9 L347.4 386.1 L353.7 384.9 L361.7 380.7 L375.1 378.2 L390.3 371.0 L398.2 364.7 L399.5 360.9 L407.9 355.5 L410.0 349.2 L414.6 349.6 L416.7 348.3 L420.1 348.3 L423.0 345.8 L424.3 342.5 L423.9 337.0 L421.4 334.1 L416.7 331.5 L415.1 324.4 L409.2 320.6 L409.2 316.8 L412.1 311.8 L412.1 303.0 L412.9 302.1 L416.7 302.1 L418.4 306.3 L420.9 308.0 L429.3 305.5 L432.3 303.0 L438.6 294.2 L448.2 292.1 L449.9 290.0 L450.3 285.8 L454.1 285.8 L457.5 283.2 L453.3 280.3 L453.3 274.8 L458.3 271.1 L459.6 268.1 L459.6 265.6 L457.5 261.8 L457.5 258.5 L463.8 258.5 L466.7 256.4 L466.7 250.5 L470.9 247.1 L470.1 241.7 L472.2 239.1 L471.8 237.0 L467.5 233.7 L467.1 228.2 L471.8 227.0 L475.5 223.6 L477.2 223.6 L477.2 220.2 L475.1 219.8 L465.4 204.7 L459.6 198.4 L457.5 185.0 L453.3 182.9 L452.4 179.5 L449.1 177.8 L446.6 179.9 L443.2 179.9 L439.0 177.4 L439.8 172.8 L438.1 171.1 L438.1 167.7 L443.6 166.5 L445.3 164.8 L446.6 159.3 L448.2 156.8 L444.9 149.3 L441.5 145.5 L435.6 143.0 L428.1 142.1 L426.4 140.0 L420.9 138.3 L420.9 132.0 L415.1 127.4 L415.1 124.1 L407.1 115.2 L405.4 110.2 L406.6 101.8 L404.1 93.0 L404.1 87.5 L405.4 83.7 Z"/>
+    <g id="ship">
+      <path class="fp" d="M-14 0 H14 L10 7 H-10 Z"/>
+      <path class="l" d="M0 0 V-27"/>
+      <path class="fp" d="M-1 -25 L-1 -3 L-13 -3 Z"/>
+      <path class="fp" d="M2 -21 L2 -3 L13 -3 Z"/>
+      <path class="l" d="M0 -27 L6 -25"/>
+    </g>
+    <g id="rav">
+      <path class="l" d="M0 0 V70"/>
+      <path class="l" d="M0 70 C-6 72 -12 74 -18 80 M0 70 C6 72 12 74 18 80"/>
+      <g class="leafset">
+        <g transform="rotate(-84)"><path class="fs" d="M0 0 C-7 -20 -7 -52 0 -80 C7 -52 7 -20 0 0Z"/><path class="t" d="M0 -4 V-74"/></g>
+        <g transform="rotate(-63)"><path class="fs" d="M0 0 C-7 -20 -7 -52 0 -84 C7 -52 7 -20 0 0Z"/><path class="t" d="M0 -4 V-78"/></g>
+        <g transform="rotate(-42)"><path class="fs" d="M0 0 C-7 -20 -7 -54 0 -88 C7 -54 7 -20 0 0Z"/><path class="t" d="M0 -4 V-82"/></g>
+        <g transform="rotate(-21)"><path class="fs" d="M0 0 C-7 -20 -7 -56 0 -90 C7 -56 7 -20 0 0Z"/><path class="t" d="M0 -4 V-84"/></g>
+        <g transform="rotate(0)"><path class="fs" d="M0 0 C-7 -22 -7 -58 0 -94 C7 -58 7 -22 0 0Z"/><path class="t" d="M0 -4 V-88"/></g>
+        <g transform="rotate(21)"><path class="fs" d="M0 0 C-7 -20 -7 -56 0 -90 C7 -56 7 -20 0 0Z"/><path class="t" d="M0 -4 V-84"/></g>
+        <g transform="rotate(42)"><path class="fs" d="M0 0 C-7 -20 -7 -54 0 -88 C7 -54 7 -20 0 0Z"/><path class="t" d="M0 -4 V-82"/></g>
+        <g transform="rotate(63)"><path class="fs" d="M0 0 C-7 -20 -7 -52 0 -84 C7 -52 7 -20 0 0Z"/><path class="t" d="M0 -4 V-78"/></g>
+        <g transform="rotate(84)"><path class="fs" d="M0 0 C-7 -20 -7 -52 0 -80 C7 -52 7 -20 0 0Z"/><path class="t" d="M0 -4 V-74"/></g>
+      </g>
+    </g>
+    <g id="hib">
+      <g transform="rotate(0)"><path class="fp" d="M0 0 C-16 -10 -20 -34 0 -42 C20 -34 16 -10 0 0Z"/><path class="t" d="M0 -6 V-34"/></g>
+      <g transform="rotate(72)"><path class="fp" d="M0 0 C-16 -10 -20 -34 0 -42 C20 -34 16 -10 0 0Z"/><path class="t" d="M0 -6 V-34"/></g>
+      <g transform="rotate(144)"><path class="fp" d="M0 0 C-16 -10 -20 -34 0 -42 C20 -34 16 -10 0 0Z"/><path class="t" d="M0 -6 V-34"/></g>
+      <g transform="rotate(216)"><path class="fp" d="M0 0 C-16 -10 -20 -34 0 -42 C20 -34 16 -10 0 0Z"/><path class="t" d="M0 -6 V-34"/></g>
+      <g transform="rotate(288)"><path class="fp" d="M0 0 C-16 -10 -20 -34 0 -42 C20 -34 16 -10 0 0Z"/><path class="t" d="M0 -6 V-34"/></g>
+      <circle r="5" class="fg"/>
+      <path class="g" d="M0 0 C4 -14 12 -22 22 -26"/>
+      <circle cx="22" cy="-26" r="2.6" class="fg"/><circle cx="17" cy="-22" r="2" class="fg"/><circle cx="12" cy="-17" r="2" class="fg"/>
+    </g>
+    <g id="cane">
+      <path class="l" d="M-14 0 C-14 -40 -16 -80 -18 -118"/>
+      <path class="l" d="M0 0 C0 -40 0 -86 0 -126"/>
+      <path class="l" d="M14 0 C14 -40 16 -80 18 -118"/>
+      <path class="t" d="M-17 -30 h6 M-17 -60 h6 M-18 -90 h6 M-3 -26 h6 M-3 -58 h6 M-3 -92 h6 M11 -30 h6 M12 -60 h6 M13 -90 h6"/>
+      <path class="fs" d="M-18 -118 C-40 -126 -56 -118 -70 -98 C-50 -106 -34 -108 -18 -104Z"/>
+      <path class="fs" d="M0 -126 C-16 -150 -34 -156 -50 -152 C-34 -146 -18 -138 0 -112Z"/>
+      <path class="fs" d="M0 -126 C16 -150 34 -156 50 -152 C34 -146 18 -138 0 -112Z"/>
+      <path class="fs" d="M18 -118 C40 -126 56 -118 70 -98 C50 -106 34 -108 18 -104Z"/>
+    </g>
+    <pattern id="wv" width="30" height="14" patternUnits="userSpaceOnUse">
+      <path d="M0 7 q7.5 -9 15 0 t15 0" fill="none" stroke="#C8A25B" stroke-width="1.2" stroke-linecap="round"/>
+    </pattern>
+    <clipPath id="sceneclip"><rect x="14" y="14" width="272" height="192" rx="6"/></clipPath>
+    <pattern id="wvA" width="40" height="12" patternUnits="userSpaceOnUse"><path d="M0 6 q10 -8 20 0 t20 0" fill="none" stroke="#0A1F2B" stroke-width=".9" stroke-linecap="round" opacity=".7"/></pattern>
+    <path id="ringpath" d="M70 70 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/>
+  </defs>
+</svg>
+
+<main>
+  <header class="top">
+    <p class="t1">The Illustration Board</p>
+    <p class="t2">PRIVATE MAURITIUS</p>
+    <p class="lead">Nine ideas for hand-drawn art on the PrimaLuxGo website, shown as rough sketches in our colours: navy ink, small touches of gold, on cream. On the live site one illustrator redraws all of it in a single engraved style.</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- 1 ATLAS -->
+    <section class="sec">
+      <h2>1 · Island Atlas map</h2>
+      <p class="use">Used on the Experiences page and a teaser on Home. Each place on the chart opens the activities for that area.</p>
+      <div class="plate">
+        <svg viewBox="0 0 640 440" role="img" aria-label="Engraved chart of Mauritius with ripples, a reef line, a compass rose, ships and place names">
+          <rect x="5" y="5" width="630" height="430" class="g"/>
+          <rect x="13" y="13" width="614" height="414" class="t"/>
+          <g transform="translate(330 232) scale(1.14) translate(-330 -232)"><use href="#isle" class="t" style="opacity:.22"/></g>
+          <g transform="translate(330 232) scale(1.1) translate(-330 -232)"><use href="#isle" class="g dash2"/></g>
+          <g transform="translate(330 232) scale(1.07) translate(-330 -232)"><use href="#isle" class="t" style="opacity:.4"/></g>
+          <g transform="translate(330 232) scale(1.035) translate(-330 -232)"><use href="#isle" class="t" style="opacity:.65"/></g>
+          <use href="#isle" class="fs" style="stroke-width:1.8"/>
+          <g class="l" style="stroke-width:1.1"><path d="M288.4 224.8 l7 -11 l7 11 M315.6 203.8 l7 -11 l7 11 M340.8 245.8 l7 -11 l7 11 M303.0 277.3 l7 -11 l7 11 M353.4 300.4 l7 -11 l7 11 M275.8 187.0 l7 -11 l7 11"/></g>
+          <g class="t" style="opacity:.8">
+            <path d="M96 196 q4 -5 8 0 t8 0 M70 262 q4 -5 8 0 t8 0 M540 190 q4 -5 8 0 t8 0 M572 246 q4 -5 8 0 t8 0 M120 392 q4 -5 8 0 t8 0 M500 404 q4 -5 8 0 t8 0 M96 330 q4 -5 8 0 t8 0 M520 300 q4 -5 8 0 t8 0"/>
+          </g>
+          <circle cx="253.4" cy="312.2" r="3.5" class="fg"/><text x="263.4" y="316.2" class="lab">CHAMAREL</text>
+          <circle cx="190.4" cy="352.1" r="3.5" class="fg"/><text x="180.4" y="356.1" class="lab" text-anchor="end">LE MORNE</text>
+          <circle cx="298.7" cy="153.5" r="3.5" class="fg"/><text x="288.7" y="157.5" class="lab" text-anchor="end">PORT LOUIS</text>
+          <circle cx="357.5" cy="76.2" r="3.5" class="fg"/><text x="367.5" y="80.2" class="lab">GRAND BAIE</text>
+          <circle cx="415.0" cy="337.4" r="3.5" class="fg"/><text x="425.0" y="353.4" class="lab">BLUE BAY</text>
+          <circle cx="224.0" cy="240.8" r="3.5" class="fg"/><text x="214.0" y="244.8" class="lab" text-anchor="end">FLIC EN FLAC</text>
+          <use href="#ship" transform="translate(96 150)"/>
+          <use href="#ship" transform="translate(556 340) scale(.9)"/>
+          <use href="#ship" transform="translate(104 392) scale(.75)"/>
+          <g transform="translate(556 100)">
+            <circle r="36" class="t"/>
+            <circle r="30" class="g" style="stroke-width:.8"/>
+            <path class="fp" d="M0 -46 L7 -7 L46 0 L7 7 L0 46 L-7 7 L-46 0 L-7 -7Z"/>
+            <path class="fg" d="M0 -46 L7 -7 L-7 -7Z"/>
+            <path class="t" d="M0 0 L26 -26 M0 0 L26 26 M0 0 L-26 26 M0 0 L-26 -26"/>
+            <text y="-54" text-anchor="middle" class="sc" style="font-size:12px">N</text>
+          </g>
+          <g>
+            <rect x="30" y="30" width="170" height="64" class="fp"/>
+            <rect x="35" y="35" width="160" height="54" class="g" style="stroke-width:.8"/>
+            <text x="115" y="64" text-anchor="middle" class="scr" style="font-size:28px">Île Maurice</text>
+            <text x="115" y="81" text-anchor="middle" class="sc" style="font-size:8px">A CHART OF THE ISLAND</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 2 WILDLIFE -->
+    <section class="sec" id="wildlife">
+      <h2>2 · Wildlife vignettes, animated</h2>
+      <p class="use">Small living scenes for the About page, the Journal and loading screens. Each animal does one thing: the tropicbird flies, the dodo walks, the giant tortoise eats and the pink pigeon pecks for seeds.</p>
+      <div><button class="replay" type="button" id="pauseAnim" aria-pressed="false">Pause animation</button></div>
+      <div class="grid anim">
+
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Animated red-tailed tropicbird flapping its wings over the sea in front of a flat-topped mountain">
+            <rect x="6" y="6" width="288" height="208" class="g"/><rect x="12" y="12" width="276" height="196" class="t"/>
+            <g clip-path="url(#sceneclip)">
+              <rect x="14" y="14" width="272" height="192" fill="#CDE8E4"/>
+              <circle cx="236" cy="50" r="15" class="fg"/>
+              <path class="g" style="stroke-width:1" d="M236 28 V20 M216 36 L210 30 M256 36 L262 30 M208 50 H198 M264 50 H274"/>
+              <g class="cloud"><path class="fp" d="M40 64 q4 -12 18 -9 q6 -10 18 -3 q12 -2 14 10 H40Z"/></g>
+              <g class="cloud slow"><path class="fp" d="M170 92 q4 -10 16 -7 q6 -9 16 -2 q10 -2 12 9 H170Z"/></g>
+              <path class="fs" d="M14 168 L44 150 L60 118 L64 104 L106 104 L112 118 L132 150 L164 168Z" style="fill:#EFE6D6"/>
+              <path class="t" d="M70 110 V150 M80 110 V158 M90 110 V160 M100 112 V150 M60 128 V150 M110 128 V148"/>
+              <rect x="14" y="160" width="272" height="46" fill="#FFFDF8"/>
+              <path class="r" d="M14 160 H286"/>
+              <g class="waves"><rect x="-40" y="166" width="400" height="40" fill="url(#wvA)"/></g>
+              <g transform="translate(26 6)">
+                <g class="bob">
+                  <g transform="translate(150 94)"><g class="wing far"><path class="fs" style="fill:#EFE6D6" d="M0 0 C-7 -22 -20 -42 -44 -60 C-26 -58 -8 -48 8 -30 C14 -20 18 -10 18 0Z"/><path class="t" d="M-44 -60 L10 -8 M-32 -56 L12 -12 M-20 -48 L14 -14"/></g></g>
+                  <g transform="translate(94 114)"><g class="tailsw"><path class="r" style="stroke:#B4503F; stroke-width:2.2" d="M0 0 C-30 8 -60 16 -88 24"/><path class="r" style="stroke:#B4503F; stroke-width:1.6" d="M2 2 C-26 14 -54 26 -80 38"/></g></g>
+                  <path class="fp" d="M92 114 C110 96 138 88 166 90 C182 90 196 94 200 100 C198 108 186 114 168 116 C140 120 108 120 92 114Z"/>
+                  <path class="t" d="M110 108 q12 -6 26 -4 M120 114 q18 -4 36 0 M150 108 q10 -2 18 2"/>
+                  <path class="fi" d="M184 94 Q192 90 200 95 Q192 100 184 97Z"/>
+                  <path class="fp" style="fill:#B4503F" d="M200 97 L224 104 L200 105Z"/>
+                  <circle cx="193" cy="95" r="1.2" style="fill:#FFFDF8"/>
+                  <path class="l" d="M122 118 l-8 5 M126 118 l-6 6"/>
+                  <g transform="translate(142 96)"><g class="wing"><path class="fp" d="M0 0 C-8 -26 -24 -50 -52 -70 C-30 -68 -8 -56 10 -34 C18 -22 22 -10 22 0Z"/><path class="t" d="M-52 -70 L4 -6 M-38 -64 L10 -10 M-26 -56 L14 -12 M-14 -46 L16 -14"/><path class="fi" d="M-52 -70 C-46 -66 -40 -62 -34 -56 L-40 -62Z"/></g></g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <figcaption class="cap">Red-tailed tropicbird<small>Flying: wings beat, long red tail streams behind</small></figcaption>
+        </figure>
+
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Animated dodo walking along a path with hills behind it">
+            <rect x="6" y="6" width="288" height="208" class="g"/><rect x="12" y="12" width="276" height="196" class="t"/>
+            <g clip-path="url(#sceneclip)">
+              <rect x="14" y="14" width="272" height="192" fill="#EFE6D6"/>
+              <circle cx="46" cy="52" r="13" class="fg"/>
+              <path class="fs" d="M14 156 L58 122 L86 142 L128 100 L172 140 L212 116 L286 156 V170 H14Z"/>
+              <path class="t" d="M128 100 V138 M120 108 V140 M136 108 V140 M212 116 V148 M204 122 V148 M58 122 V148"/>
+              <g transform="translate(262 80) scale(.5)"><use href="#rav"/></g>
+              <rect x="14" y="170" width="272" height="36" fill="#FFFDF8"/>
+              <path class="l" d="M14 170 H286"/>
+              <g class="ground">
+                <path class="t" d="M20 190 l-4 -9 M20 190 l1 -11 M20 190 l5 -8 M80 196 l-4 -9 M80 196 l1 -11 M80 196 l5 -8 M140 188 l-4 -9 M140 188 l1 -11 M140 188 l5 -8 M200 196 l-4 -9 M200 196 l1 -11 M200 196 l5 -8 M260 190 l-4 -9 M260 190 l1 -11 M260 190 l5 -8 M320 196 l-4 -9 M320 196 l1 -11 M320 196 l5 -8 M380 188 l-4 -9 M380 188 l1 -11 M380 188 l5 -8 M440 196 l-4 -9 M440 196 l1 -11 M440 196 l5 -8"/>
+              </g>
+              <g transform="translate(-8 -4)">
+                <g transform="translate(150 158)"><g class="step a"><path class="legp" d="M0 0 C3 12 -1 24 -2 34"/><path class="toe" d="M-2 34 l-11 6 M-2 34 l1 9 M-2 34 l11 5"/></g></g>
+                <g transform="translate(178 160)"><g class="step b"><path class="legp" d="M0 0 C3 12 -1 24 -2 34"/><path class="toe" d="M-2 34 l-11 6 M-2 34 l1 9 M-2 34 l11 5"/></g></g>
+                <g class="dbob">
+                  <path class="l" d="M94 114 C80 100 66 104 68 116 C70 122 78 122 82 120 M92 122 C78 116 64 124 72 132 M96 130 C84 130 78 138 88 142"/>
+                  <path class="fp" d="M92 112 C80 144 108 170 150 170 C192 170 218 148 212 118 C208 96 180 82 148 84 C122 86 100 94 92 112Z"/>
+                  <path class="t" d="M110 150 q20 14 52 14 M120 140 q24 14 58 8 M124 126 q10 -6 22 -2 M146 100 q12 -8 24 -2 M122 108 q10 -8 22 -4 M176 112 q10 -4 18 2"/>
+                  <path class="fp" d="M128 118 C146 108 176 112 186 132 C170 130 148 134 128 118Z"/>
+                  <path class="t" d="M140 122 l30 8 M146 118 l30 10 M134 120 l22 6"/>
+                  <g class="dhead">
+                    <path class="fp" d="M184 98 C192 84 196 70 206 62 L230 68 C224 84 216 100 210 112 C202 108 192 104 184 98Z"/>
+                    <path class="t" d="M196 90 q8 -2 14 2 M200 80 q8 -2 14 2"/>
+                    <ellipse cx="220" cy="60" rx="17" ry="15" class="fp"/>
+                    <path class="fp" style="fill:#B6C7C9" d="M232 50 C254 44 270 56 266 72 C264 82 254 86 246 80 C252 74 252 68 244 66 C238 64 232 68 228 72Z"/>
+                    <path class="t" d="M244 66 C250 66 256 68 256 74"/>
+                    <circle cx="221" cy="55" r="5" class="fp"/><circle cx="221.5" cy="55" r="2.6" class="fi"/>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <figcaption class="cap">Dodo<small>Walking: legs alternate, body rocks, the ground slides past</small></figcaption>
+        </figure>
+
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Animated giant tortoise stretching its neck to eat a hibiscus flower">
+            <rect x="6" y="6" width="288" height="208" class="g"/><rect x="12" y="12" width="276" height="196" class="t"/>
+            <g clip-path="url(#sceneclip)">
+              <rect x="14" y="14" width="272" height="192" fill="#CDE8E4"/>
+              <circle cx="60" cy="52" r="14" class="fg"/>
+              <path class="fp" d="M150 60 q4 -10 16 -7 q6 -9 16 -2 q10 -2 12 9 H150Z"/>
+              <rect x="14" y="188" width="272" height="18" fill="#FFFDF8"/>
+              <path class="l" d="M14 188 H286"/>
+              <path class="t" d="M30 198 H60 M90 200 H130 M160 198 H190 M214 200 H250"/>
+              <g transform="translate(278 190)">
+                <path class="l" d="M0 0 C-2 -8 -4 -14 -6 -20"/>
+                <path class="fs" d="M-6 -12 C-18 -16 -26 -10 -28 -2 C-18 -2 -10 -6 -6 -12Z M-4 -6 C6 -10 14 -6 16 2 C8 2 0 0 -4 -6Z"/>
+                <g transform="translate(-6 -22) scale(.36)" style="transform-origin:0 0"><use href="#hib"/></g>
+              </g>
+              <g transform="translate(-30 4)">
+                <g transform="translate(70 160)"><g class="tleg b"><path class="fp" d="M-14 0 C-16 12 -18 22 -20 28 H8 C6 20 6 10 6 0Z"/><path class="t" d="M-18 24 h6 M-8 26 h6"/></g></g>
+                <g transform="translate(204 160)"><g class="tleg f"><path class="fp" d="M-14 0 C-14 12 -14 22 -12 28 H16 C14 20 14 10 12 0Z"/><path class="t" d="M-10 24 h6 M0 26 h6"/></g></g>
+                <path class="fp" d="M52 160 C50 104 94 70 146 70 C200 70 236 108 234 160Z"/>
+                <path class="t" d="M86 100 C94 122 96 146 92 160 M130 78 C134 108 134 138 132 160 M174 78 C176 108 178 138 180 160 M210 92 C208 120 208 142 212 160 M60 138 C110 126 190 126 232 138 M70 112 C120 100 180 100 226 112"/>
+                <path class="t" d="M104 124 q8 -5 16 0 M146 116 q8 -5 16 0 M188 124 q8 -5 16 0 M104 148 q8 -5 16 0 M146 144 q8 -5 16 0 M188 148 q8 -5 16 0"/>
+                <path class="t" d="M214 112 L226 120 M216 126 L230 132 M214 140 L230 146 M220 100 L232 108"/>
+                <path class="l" style="stroke-width:2" d="M50 162 H236"/>
+                <g class="reach">
+                  <path class="fp" d="M228 118 C246 114 258 124 262 138 C264 148 262 158 254 160 C244 158 234 152 228 150Z"/>
+                  <path class="t" d="M236 124 q6 -2 10 2 M236 136 q6 -2 10 2 M236 146 q6 -2 10 2"/>
+                  <path class="fp" d="M246 132 C258 124 276 130 280 144 C281 152 274 156 266 156 C256 156 248 150 246 142Z"/>
+                  <circle cx="266" cy="140" r="4" class="fp"/><circle cx="267" cy="140" r="2" class="fi"/>
+                  <path class="l" style="stroke-width:1.1" d="M276 146 l3 1"/>
+                  <g transform="translate(268 154)"><g class="jaw"><path class="fp" d="M-18 0 C-10 8 2 10 10 4 C6 -2 -10 -2 -18 0Z"/></g></g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <figcaption class="cap">Giant tortoise<small>Eating: the neck stretches out and the jaw chews</small></figcaption>
+        </figure>
+
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Animated pink pigeon pecking seeds from the ground">
+            <rect x="6" y="6" width="288" height="208" class="g"/><rect x="12" y="12" width="276" height="196" class="t"/>
+            <g clip-path="url(#sceneclip)">
+              <rect x="14" y="14" width="272" height="192" fill="#EFE6D6"/>
+              <g transform="translate(60 120) scale(.7)"><use href="#rav"/></g>
+              <circle cx="244" cy="50" r="13" class="fg"/>
+              <rect x="14" y="172" width="272" height="34" fill="#FFFDF8"/>
+              <path class="l" d="M14 172 H286"/>
+              <path class="t" d="M30 186 l-3 -8 M30 186 l1 -10 M30 186 l4 -7 M96 192 l-3 -8 M96 192 l1 -10 M96 192 l4 -7 M270 190 l-3 -8 M270 190 l1 -10 M270 190 l4 -7"/>
+              <ellipse cx="236" cy="175" rx="3" ry="1.6" class="fg"/><ellipse cx="248" cy="177" rx="3" ry="1.6" class="fg"/><ellipse cx="228" cy="178" rx="2.6" ry="1.4" class="fg"/>
+              <g transform="translate(0 -8)">
+                <path class="l" style="stroke:#B4503F; stroke-width:2" d="M140 156 L138 178 M138 178 l-8 4 M138 178 l1 5 M138 178 l8 3 M158 156 L157 178 M157 178 l-8 4 M157 178 l1 5 M157 178 l8 3"/>
+                <path class="fp" style="fill:#C9A894" d="M102 132 L46 150 L40 144 L98 122Z"/>
+                <path class="t" d="M98 128 L50 147 M100 132 L56 152 M96 124 L46 144"/>
+                <path class="fp" style="fill:#F3D3CF" d="M100 134 C94 112 118 98 148 100 C172 102 188 114 186 130 C184 148 160 158 132 156 C114 154 104 146 100 134Z"/>
+                <path class="t" d="M120 142 q14 8 34 6 M130 150 q12 4 24 2"/>
+                <path class="fp" style="fill:#D6B7A4" d="M112 120 C132 108 160 112 174 128 C156 136 130 138 112 120Z"/>
+                <path class="t" d="M122 122 l40 6 M128 118 l38 8"/>
+                <g class="fi"><circle cx="128" cy="122" r=".9"/><circle cx="138" cy="118" r=".9"/><circle cx="148" cy="120" r=".9"/><circle cx="158" cy="124" r=".9"/><circle cx="134" cy="126" r=".9"/><circle cx="146" cy="128" r=".9"/><circle cx="160" cy="130" r=".9"/></g>
+                <g transform="translate(184 126)"><g class="peck">
+                  <circle cx="2" cy="0" r="14" style="fill:#F3D3CF; stroke:none"/>
+                  <path class="fp" style="fill:#F3D3CF" d="M-6 -10 C4 -22 12 -30 18 -36 L30 -30 C26 -18 20 -4 12 8Z"/>
+                  <circle cx="25" cy="-38" r="11" class="fp" style="fill:#F3D3CF"/>
+                  <circle cx="29" cy="-40" r="4.6" class="fp" style="fill:#FFFDF8; stroke:#B4503F"/><circle cx="29.5" cy="-40" r="2" class="fi"/>
+                  <path class="fp" style="fill:#8E9AA0" d="M35 -38 L50 -34 L35 -30Z"/>
+                  <path class="t" d="M12 -22 q6 -2 10 2 M8 -12 q6 -2 10 2"/>
+                </g></g>
+              </g>
+            </g>
+          </svg>
+          <figcaption class="cap">Pink pigeon<small>Eating: bobs down to peck seeds, then looks up</small></figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- 3 ARCHES -->
+    <section class="sec">
+      <h2>3 · Three arch doorways</h2>
+      <p class="use">The Home page entrance to Ocean, Island and Sky, and the header image of each collection page.</p>
+      <div class="grid">
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 180 270" role="img" aria-label="Arch doorway showing a sailboat on the sea at sunrise">
+            <defs><clipPath id="clipO"><path d="M20 254 V112 A70 70 0 0 1 160 112 V254Z"/></clipPath></defs>
+            <path class="g" d="M12 258 V112 A78 78 0 0 1 168 112 V258Z"/>
+            <g clip-path="url(#clipO)">
+              <rect x="10" y="30" width="160" height="230" fill="#CDE8E4"/>
+              <circle cx="90" cy="150" r="30" class="fg"/>
+              <path class="g" style="stroke-width:1" d="M90 108 V96 M60 118 L52 110 M120 118 L128 110 M48 140 H34 M132 140 H146"/>
+              <rect x="10" y="150" width="160" height="110" fill="#FFFDF8"/>
+              <path class="r" d="M10 150 H170"/>
+              <path class="t" d="M10 164 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M10 180 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M10 198 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M10 218 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M10 240 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0"/>
+              <path class="fp" d="M70 176 H112 L104 188 H78Z"/>
+              <path class="l" d="M90 176 V128"/>
+              <path class="fp" d="M89 130 L89 174 L64 174Z"/>
+              <path class="fp" d="M93 140 L93 174 L112 174Z"/>
+            </g>
+            <path class="l" d="M20 254 V112 A70 70 0 0 1 160 112 V254Z"/>
+            <text x="90" y="266" text-anchor="middle" class="sc" style="font-size:0">Ocean</text>
+          </svg>
+          <figcaption class="cap">Ocean<small>Sunrise over the lagoon</small></figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 180 270" role="img" aria-label="Arch doorway showing a flat-topped mountain and palm trees">
+            <defs><clipPath id="clipI"><path d="M20 254 V112 A70 70 0 0 1 160 112 V254Z"/></clipPath></defs>
+            <path class="g" d="M12 258 V112 A78 78 0 0 1 168 112 V258Z"/>
+            <g clip-path="url(#clipI)">
+              <rect x="10" y="30" width="160" height="230" fill="#EFE6D6"/>
+              <circle cx="132" cy="78" r="13" class="fg"/>
+              <path class="fs" d="M14 226 L46 200 L62 164 L66 142 L112 142 L118 164 L140 200 L172 226Z"/>
+              <path class="t" d="M70 148 V196 M80 148 V204 M90 148 V206 M100 148 V204 M110 150 V196 M60 170 V198 M120 172 V198"/>
+              <rect x="10" y="222" width="160" height="40" fill="#FFFDF8"/>
+              <path class="r" d="M10 222 H170"/>
+              <path class="t" d="M10 236 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M10 250 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0"/>
+              <path class="l" d="M34 224 C36 206 34 190 30 176"/>
+              <path class="fs" d="M30 176 C20 166 12 168 8 176 C16 172 24 174 30 176Z M30 176 C28 164 32 156 40 152 C38 162 36 170 30 176Z M30 176 C42 168 52 170 58 178 C48 176 38 176 30 176Z"/>
+              <path class="l" d="M150 224 C148 210 150 196 154 184"/>
+              <path class="fs" d="M154 184 C144 174 138 176 134 184 C142 180 148 182 154 184Z M154 184 C152 172 156 164 164 160 C162 170 160 178 154 184Z M154 184 C166 176 174 178 178 186 C170 184 162 184 154 184Z"/>
+            </g>
+            <path class="l" d="M20 254 V112 A70 70 0 0 1 160 112 V254Z"/>
+          </svg>
+          <figcaption class="cap">Island<small>Le Morne and the palms</small></figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 180 270" role="img" aria-label="Arch doorway showing clouds and a paraglider">
+            <defs><clipPath id="clipS"><path d="M20 254 V112 A70 70 0 0 1 160 112 V254Z"/></clipPath></defs>
+            <path class="g" d="M12 258 V112 A78 78 0 0 1 168 112 V258Z"/>
+            <g clip-path="url(#clipS)">
+              <rect x="10" y="30" width="160" height="230" fill="#CDE8E4"/>
+              <path class="fp" d="M24 196 q4 -16 22 -12 q8 -16 26 -6 q18 -8 22 10 q16 -2 16 8 H24Z"/>
+              <path class="fp" d="M96 228 q6 -14 22 -10 q8 -14 24 -6 q16 -4 20 10 q12 0 12 6 H96Z"/>
+              <path class="fp" d="M10 232 q8 -12 22 -8 q8 -10 20 -4 q12 -2 16 8 H10Z"/>
+              <path class="fp" d="M58 100 C64 78 116 78 122 100 C108 92 72 92 58 100Z"/>
+              <path class="t" d="M72 90 V96 M84 86 V94 M96 86 V94 M108 88 V95"/>
+              <path class="t" d="M60 100 L88 136 M122 100 L92 136 M72 94 L89 136 M110 94 L91 136"/>
+              <circle cx="90" cy="140" r="4" class="fi"/>
+              <path class="l" d="M90 144 V158 M90 150 l-6 8 M90 150 l6 8 M90 158 l-5 8 M90 158 l5 8"/>
+              <path class="l" d="M36 70 q5 -6 10 0 q5 -6 10 0 M130 56 q4 -5 8 0 q4 -5 8 0"/>
+              <circle cx="132" cy="150" r="10" class="fg" style="opacity:.6"/>
+            </g>
+            <path class="l" d="M20 254 V112 A70 70 0 0 1 160 112 V254Z"/>
+          </svg>
+          <figcaption class="cap">Sky<small>Clouds and a paraglider</small></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 4 STAMPS -->
+    <section class="sec">
+      <h2>4 · Activity stamps</h2>
+      <p class="use">One emblem per activity: on the activity cards, in the filters, and as the icons in each page's "what to bring" and "good to know" lists.</p>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))">
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Catamaran emblem">
+            <circle cx="60" cy="60" r="56" class="g"/><circle cx="60" cy="60" r="50" class="l"/>
+            <path class="fp" d="M30 78 L38 71 H82 L90 78Z"/><path class="l" d="M36 85 H84"/>
+            <path class="l" d="M60 71 V32"/><path class="fp" d="M59 34 L59 68 L40 68Z"/><path class="fp" d="M63 42 L63 68 L82 68Z"/>
+            <path class="t" d="M26 94 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/>
+          </svg>
+          <figcaption class="cap">Catamaran</figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Helicopter emblem">
+            <circle cx="60" cy="60" r="56" class="g"/><circle cx="60" cy="60" r="50" class="l"/>
+            <ellipse cx="56" cy="66" rx="20" ry="12" class="fp"/>
+            <path class="fp" d="M44 62 C44 56 52 54 58 56 V66 H44Z"/>
+            <path class="l" d="M74 63 L96 57 M96 52 V62"/>
+            <path class="l" d="M30 46 H86 M56 54 V46"/>
+            <path class="l" d="M38 82 H74 M46 78 V82 M66 78 V82"/>
+          </svg>
+          <figcaption class="cap">Helicopter</figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Hike emblem">
+            <circle cx="60" cy="60" r="56" class="g"/><circle cx="60" cy="60" r="50" class="l"/>
+            <path class="fp" d="M26 86 L52 44 L66 66 L76 54 L96 86Z"/>
+            <path class="t" d="M44 58 L52 50 L58 58 M70 62 L76 58 L82 64"/>
+            <path class="l" d="M52 44 V30"/><path class="fg" d="M52 30 L64 34 L52 38Z"/>
+            <path class="g dash" d="M38 86 C46 78 60 80 66 72"/>
+          </svg>
+          <figcaption class="cap">Hike</figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Sunset cruise emblem">
+            <circle cx="60" cy="60" r="56" class="g"/><circle cx="60" cy="60" r="50" class="l"/>
+            <path class="fg" d="M38 70 A22 22 0 0 1 82 70Z"/>
+            <path class="g" style="stroke-width:1.1" d="M60 36 V28 M42 44 L36 38 M78 44 L84 38 M32 58 H24 M88 58 H96"/>
+            <path class="l" d="M24 70 H96"/>
+            <path class="t" d="M30 80 H90 M38 88 H82 M46 96 H74"/>
+            <path class="fp" d="M54 70 L58 64 H70 L74 70Z"/>
+          </svg>
+          <figcaption class="cap">Sunset cruise</figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Chauffeur emblem">
+            <circle cx="60" cy="60" r="56" class="g"/><circle cx="60" cy="60" r="50" class="l"/>
+            <path class="fp" d="M26 74 H94 V64 L84 60 L74 46 H48 L38 60 L26 64Z"/>
+            <path class="t" d="M50 50 H72 L80 60 H44Z M60 50 V60"/>
+            <circle cx="42" cy="76" r="8" class="fp"/><circle cx="42" cy="76" r="2.5" class="fi"/>
+            <circle cx="80" cy="76" r="8" class="fp"/><circle cx="80" cy="76" r="2.5" class="fi"/>
+            <path class="g" d="M26 68 H34"/>
+          </svg>
+          <figcaption class="cap">Chauffeur</figcaption>
+        </figure>
+        <figure class="plate" style="margin:0">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Snorkel emblem">
+            <circle cx="60" cy="60" r="56" class="g"/><circle cx="60" cy="60" r="50" class="l"/>
+            <path class="fp" d="M30 62 C44 44 70 44 82 62 C70 80 44 80 30 62Z"/>
+            <path class="fp" d="M82 62 L98 48 V76Z"/>
+            <path class="t" d="M52 50 C48 62 52 74 58 78 M62 48 C58 60 62 72 68 76"/>
+            <circle cx="42" cy="58" r="2.4" class="fi"/>
+            <circle cx="30" cy="40" r="3" class="t"/><circle cx="38" cy="32" r="2" class="t"/><circle cx="26" cy="30" r="1.6" class="t"/>
+          </svg>
+          <figcaption class="cap">Snorkel</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 5 DIVIDERS -->
+    <section class="sec">
+      <h2>5 · Wave and sun-ray dividers</h2>
+      <p class="use">Thin gold line art between page sections, and a wave texture behind the seal.</p>
+      <div class="plate" style="display:grid; gap:22px">
+        <svg viewBox="0 0 640 60" role="img" aria-label="Divider: a line with a small sun over waves">
+          <path class="g" d="M10 34 H262 M378 34 H630"/>
+          <path class="fg" d="M300 34 A20 20 0 0 1 340 34Z"/>
+          <path class="g" style="stroke-width:1.1" d="M320 6 V0 M298 14 L292 8 M342 14 L348 8 M284 28 H274 M356 28 H366"/>
+          <path class="g" d="M284 42 q9 -8 18 0 t18 0 t18 0 t18 0"/>
+        </svg>
+        <svg viewBox="0 0 640 70" role="img" aria-label="Divider: a fan of sun rays">
+          <path class="g" d="M10 62 H250 M390 62 H630"/>
+          <g class="g" style="stroke-width:1.2">
+            <path d="M320 62 L252 62 M320 62 L258 40 M320 62 L274 22 M320 62 L298 8 M320 62 L320 4 M320 62 L342 8 M320 62 L366 22 M320 62 L382 40 M320 62 L388 62" style="opacity:.0"/>
+            <path d="M270 58 L254 58 M274 48 L260 42 M284 38 L272 28 M298 30 L290 16 M320 26 V10 M342 30 L350 16 M356 38 L368 28 M366 48 L380 42 M370 58 L386 58"/>
+          </g>
+          <path class="fg" d="M300 62 A20 20 0 0 1 340 62Z"/>
+        </svg>
+        <svg viewBox="0 0 640 40" role="img" aria-label="Divider: a band of repeating waves">
+          <rect x="0" y="4" width="640" height="14" fill="url(#wv)"/>
+          <g transform="translate(15 0)"><rect x="-15" y="20" width="655" height="14" fill="url(#wv)"/></g>
+        </svg>
+      </div>
+      <div class="plate" style="display:grid; justify-items:center; gap:10px">
+        <svg viewBox="0 0 140 140" style="max-width:200px" role="img" aria-label="Seal with a wave texture, a script P and ring text">
+          <circle cx="70" cy="70" r="66" class="fp"/>
+          <circle cx="70" cy="70" r="66" class="g"/>
+          <clipPath id="sealclip"><circle cx="70" cy="70" r="42"/></clipPath>
+          <g clip-path="url(#sealclip)" style="opacity:.8"><rect x="20" y="20" width="100" height="100" fill="url(#wv)"/></g>
+          <circle cx="70" cy="70" r="42" class="l"/>
+          <circle cx="70" cy="70" r="53" class="t"/>
+          <text class="sc" style="font-size:8px; letter-spacing:0"><textPath href="#ringpath" startOffset="0" textLength="284" lengthAdjust="spacing">PRIMALUXGO · PRIVATE MAURITIUS ·</textPath></text>
+          <circle cx="70" cy="70" r="22" fill="#FFFDF8" stroke="#0A1F2B" stroke-width="1.2"/>
+          <text x="70" y="84" text-anchor="middle" class="scr" style="font-size:40px">P</text>
+        </svg>
+        <p class="cap">The seal with a wave texture<small>Also the stamp at the bottom of every page</small></p>
+      </div>
+    </section>
+
+    <!-- 6 SKY STRIP -->
+    <section class="sec">
+      <h2>6 · Dawn to dusk sky strip</h2>
+      <p class="use">A thin strip at the top of each activity page. As the guest scrolls through the day's timeline, the strip moves from dawn to dusk.</p>
+      <div class="plate">
+        <svg viewBox="0 0 900 200" role="img" aria-label="Five small scenes: dawn, morning, midday, golden hour and dusk">
+          <defs>
+            <clipPath id="p0"><rect x="0" y="20" width="168" height="130"/></clipPath>
+            <clipPath id="p1"><rect x="183" y="20" width="168" height="130"/></clipPath>
+            <clipPath id="p2"><rect x="366" y="20" width="168" height="130"/></clipPath>
+            <clipPath id="p3"><rect x="549" y="20" width="168" height="130"/></clipPath>
+            <clipPath id="p4"><rect x="732" y="20" width="168" height="130"/></clipPath>
+          </defs>
+          <!-- dawn -->
+          <g clip-path="url(#p0)">
+            <rect x="0" y="20" width="168" height="130" fill="#F0D8BE"/>
+            <circle cx="36" cy="110" r="16" class="fg"/>
+            <path class="g" style="stroke-width:1.1" d="M36 84 V72 M14 92 L6 84 M58 92 L66 84 M8 110 H-4 M64 110 H76"/>
+            <rect x="0" y="110" width="168" height="40" fill="#FFFDF8"/><path class="r" d="M0 110 H168"/>
+            <path class="t" d="M0 122 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 M0 136 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+          </g>
+          <rect x="0" y="20" width="168" height="130" class="l"/>
+          <!-- morning -->
+          <g clip-path="url(#p1)">
+            <rect x="183" y="20" width="168" height="130" fill="#E3F0EA"/>
+            <circle cx="231" cy="66" r="14" class="fg"/>
+            <path class="g" style="stroke-width:1.1" d="M231 44 V36 M213 52 L207 46 M249 52 L255 46 M205 66 H197 M257 66 H265"/>
+            <rect x="183" y="110" width="168" height="40" fill="#FFFDF8"/><path class="r" d="M183 110 H351"/>
+            <path class="t" d="M183 122 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 M183 136 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+          </g>
+          <rect x="183" y="20" width="168" height="130" class="l"/>
+          <!-- midday -->
+          <g clip-path="url(#p2)">
+            <rect x="366" y="20" width="168" height="130" fill="#BFE3E1"/>
+            <circle cx="450" cy="50" r="14" class="fg"/>
+            <path class="g" style="stroke-width:1.1" d="M450 28 V20 M432 36 L426 30 M468 36 L474 30 M424 50 H416 M476 50 H484"/>
+            <path class="fp" d="M384 90 q4 -10 16 -7 q6 -9 18 -3 q12 -3 14 8 H384Z"/>
+            <rect x="366" y="110" width="168" height="40" fill="#FFFDF8"/><path class="r" d="M366 110 H534"/>
+            <path class="t" d="M366 122 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 M366 136 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+          </g>
+          <rect x="366" y="20" width="168" height="130" class="l"/>
+          <!-- golden hour -->
+          <g clip-path="url(#p3)">
+            <rect x="549" y="20" width="168" height="130" fill="#EFD8A6"/>
+            <circle cx="677" cy="86" r="15" class="fg"/>
+            <path class="g" style="stroke-width:1.1" d="M677 62 V52 M657 70 L650 63 M697 70 L704 63 M650 86 H640 M704 86 H714"/>
+            <rect x="549" y="110" width="168" height="40" fill="#FFFDF8"/><path class="r" d="M549 110 H717"/>
+            <path class="g" d="M664 116 H690 M668 122 H686 M672 128 H682"/>
+            <path class="t" d="M549 124 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 M549 138 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+          </g>
+          <rect x="549" y="20" width="168" height="130" class="l"/>
+          <!-- dusk -->
+          <g clip-path="url(#p4)">
+            <rect x="732" y="20" width="168" height="130" fill="#2A4B63"/>
+            <circle cx="846" cy="60" r="14" fill="#F7F1E6"/>
+            <circle cx="853" cy="55" r="12" fill="#2A4B63"/>
+            <path style="stroke:#F7F1E6;stroke-width:1.2;stroke-linecap:round;fill:none" d="M770 46 h6 M773 43 v6 M806 74 h5 M808.5 71.5 v5 M880 90 h5 M882.5 87.5 v5 M752 80 h4 M754 78 v4"/>
+            <rect x="732" y="110" width="168" height="40" fill="#163447"/><path style="stroke:#C8A25B;stroke-width:1.4" d="M732 110 H900"/>
+            <path style="stroke:#F7F1E6;stroke-width:.8;fill:none;opacity:.6" d="M732 124 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 M732 138 q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+            <path style="stroke:#C8A25B;stroke-width:1.2;fill:none" d="M846 114 V150"/>
+          </g>
+          <rect x="732" y="20" width="168" height="130" class="l"/>
+          <text x="84" y="176" text-anchor="middle" class="sc" style="font-size:12px">DAWN</text>
+          <text x="267" y="176" text-anchor="middle" class="sc" style="font-size:12px">MORNING</text>
+          <text x="450" y="176" text-anchor="middle" class="sc" style="font-size:12px">MIDDAY</text>
+          <text x="633" y="176" text-anchor="middle" class="sc" style="font-size:12px">GOLDEN HOUR</text>
+          <text x="816" y="176" text-anchor="middle" class="sc" style="font-size:12px">DUSK</text>
+          <path class="g dash" d="M84 14 C220 -6 330 -6 450 14 C570 34 700 -6 816 14" style="opacity:.0"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 7 BOTANICAL -->
+    <section class="sec">
+      <h2>7 · Botanical corners</h2>
+      <p class="use">Drawn into the corners of the invitation-style cards and under section headings. Ravenala palm, hibiscus and sugar cane.</p>
+      <div class="two">
+        <div class="plate">
+          <svg viewBox="0 0 380 260" role="img" aria-label="Invitation card with a ravenala palm in one corner and a hibiscus in the other">
+            <rect x="6" y="6" width="368" height="248" class="fp"/>
+            <rect x="14" y="14" width="352" height="232" class="g" style="stroke-width:1"/>
+            <g transform="translate(70 102) scale(.7)"><use href="#rav"/></g>
+            <g transform="translate(312 206) scale(.9)"><use href="#hib"/></g>
+            <g transform="translate(40 232) scale(.34)"><use href="#cane"/></g>
+            <text x="190" y="100" text-anchor="middle" class="sc" style="font-size:10px; fill:#8A6A2A">OCEAN COLLECTION</text>
+            <text x="190" y="140" text-anchor="middle" class="scr" style="font-size:32px">Catamaran at Dawn</text>
+            <text x="190" y="166" text-anchor="middle" class="sc" style="font-size:9px">4 HOURS · UP TO 8 GUESTS</text>
+          </svg>
+        </div>
+        <div class="plate" style="display:grid; gap:14px; align-content:center">
+          <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; align-items:end">
+            <svg viewBox="-100 -100 200 200" role="img" aria-label="Ravenala palm"><g transform="translate(0 20)"><use href="#rav"/></g></svg>
+            <svg viewBox="-60 -60 120 120" role="img" aria-label="Hibiscus flower"><use href="#hib"/></svg>
+            <svg viewBox="-80 -170 160 190" role="img" aria-label="Sugar cane"><use href="#cane"/></svg>
+          </div>
+          <p class="cap">Ravenala · hibiscus · sugar cane</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 STAMP AND TICKET -->
+    <section class="sec">
+      <h2>8 · Postcard stamp and ticket stub</h2>
+      <p class="use">The "booking confirmed" screen, the confirmation email header and the digital gift voucher.</p>
+      <div class="two">
+        <div class="plate" style="display:grid; justify-items:center">
+          <svg viewBox="0 0 280 230" role="img" aria-label="Postage stamp with a sailboat and a round postmark">
+            <g transform="translate(40 14)">
+              <rect x="8" y="8" width="150" height="190" fill="#FFFDF8" stroke="#0A1F2B" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 11"/>
+              <rect x="14" y="14" width="138" height="178" class="fp"/>
+              <rect x="21" y="21" width="124" height="164" class="g" style="stroke-width:1"/>
+              <rect x="27" y="27" width="112" height="100" fill="#CDE8E4" stroke="#0A1F2B" stroke-width="1"/>
+              <circle cx="83" cy="86" r="14" class="fg"/>
+              <rect x="27" y="88" width="112" height="39" fill="#FFFDF8" stroke="#0A1F2B" stroke-width="1"/>
+              <path class="t" d="M28 99 q7 -5 14 0 t14 0 t14 0 t14 0 t14 0 t14 0 M28 112 q7 -5 14 0 t14 0 t14 0 t14 0 t14 0 t14 0"/>
+              <path class="fp" d="M62 98 H100 L94 108 H68Z"/><path class="l" d="M81 98 V62"/>
+              <path class="fp" d="M80 64 L80 96 L60 96Z"/><path class="fp" d="M84 72 L84 96 L98 96Z"/>
+              <text x="83" y="152" text-anchor="middle" class="scr" style="font-size:24px">Maurice</text>
+              <text x="83" y="174" text-anchor="middle" class="sc" style="font-size:9px">PRIMALUXGO</text>
+            </g>
+            <g transform="translate(196 74) rotate(-14)" style="opacity:.92">
+              <circle r="38" class="r" style="stroke-width:1.4"/>
+              <circle r="31" class="r" style="stroke-width:.8"/>
+              <text y="-4" text-anchor="middle" class="sc" style="font-size:10px; fill:#0E5A6E">PORT LOUIS</text>
+              <text y="12" text-anchor="middle" class="sc" style="font-size:9px; fill:#0E5A6E">07 OCT 2026</text>
+              <path class="r" d="M40 -10 q8 -6 16 0 t16 0 M40 2 q8 -6 16 0 t16 0 M40 14 q8 -6 16 0 t16 0" style="stroke-width:1.2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="plate" style="display:grid; align-content:center">
+          <svg viewBox="0 0 380 170" role="img" aria-label="Ticket stub with a perforated edge for a booked activity">
+            <path d="M12 6 H368 V66 A14 14 0 0 0 368 94 V160 H12 V94 A14 14 0 0 0 12 66 Z" fill="#FFFDF8" stroke="#0A1F2B" stroke-width="1.4"/>
+            <path d="M18 12 H362 V66 A8 8 0 0 0 362 90 V154 H18 V90 A8 8 0 0 0 18 66 Z" class="g" style="stroke-width:.9"/>
+            <path class="g dash" d="M278 14 V152"/>
+            <text x="40" y="38" class="sc" style="font-size:9px; fill:#8A6A2A">ADMIT ONE · PRIVATE CHARTER</text>
+            <text x="40" y="82" class="scr" style="font-size:30px">Catamaran at Dawn</text>
+            <text x="40" y="108" class="sc" style="font-size:9px">4 HOURS · UP TO 8 GUESTS</text>
+            <text x="40" y="136" style="font-family:var(--serif); font-size:13px; fill:#3E5A66">Reference PLG-0412 · example only</text>
+            <g transform="translate(322 84)">
+              <circle r="24" class="fp"/><circle r="19" class="g" style="stroke-width:.9"/>
+              <path class="r" d="M-12 6 q4 -5 8 0 t8 0 t8 0" style="stroke-width:1.2"/>
+              <text y="-3" text-anchor="middle" class="scr" style="font-size:20px">P</text>
+              <text y="44" text-anchor="middle" class="sc" style="font-size:7px">DAWN TO DUSK</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 ANIMATION -->
+    <section class="sec">
+      <h2>9 · Line-drawing animation</h2>
+      <p class="use">Map routes, the seal and section dividers draw themselves in as they scroll into view. With reduced motion switched on, they simply appear.</p>
+      <div class="plate" style="display:grid; gap:6px">
+        <svg id="anim" viewBox="0 0 640 200" role="img" aria-label="A seal and a map route drawing themselves with fine lines">
+          <g transform="translate(110 112)">
+            <circle r="70" class="g draw" pathLength="1"/>
+            <circle r="58" class="l draw d2" pathLength="1"/>
+            <circle r="40" class="t draw d3" pathLength="1"/>
+            <path class="r draw d3" pathLength="1" d="M-26 12 q6.5 -9 13 0 t13 0 t13 0 t13 0"/>
+            <path class="g draw d3" pathLength="1" d="M-22 -4 A22 22 0 0 1 22 -4"/>
+          </g>
+          <g transform="translate(300 8)">
+            <use href="#isle" class="l draw" pathLength="1" transform="translate(-82.4 -18.8) scale(.45)"/>
+            <path class="g draw d2" pathLength="1" d="M4 139 C26 126 38 112 42 90 C46 66 62 56 70 22" style="stroke-width:1.6"/>
+            <circle cx="4" cy="139" r="3.6" class="fg"/>
+            <circle cx="70" cy="22" r="3.6" class="fg"/>
+          </g>
+        </svg>
+        <button class="replay" type="button" id="replay">Replay</button>
+      </div>
+    </section>
+
+    <p class="foot">Sketches only, to show the direction. Names such as Le Morne and Chamarel are real places; the chart shape is simplified and not to scale.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById('replay');
+  var svg = document.getElementById('anim');
+  if (!btn || !svg) return;
+  btn.addEventListener('click', function () {
+    var els = svg.querySelectorAll('.draw');
+    els.forEach(function (el) { el.classList.remove('draw'); });
+    void svg.getBoundingClientRect();
+    els.forEach(function (el) { el.classList.add('draw'); });
+  });
+  var pb = document.getElementById('pauseAnim');
+  var wl = document.getElementById('wildlife');
+  if (pb && wl) {
+    pb.addEventListener('click', function () {
+      var on = wl.classList.toggle('paused');
+      pb.setAttribute('aria-pressed', on ? 'true' : 'false');
+      pb.textContent = on ? 'Play animation' : 'Pause animation';
+    });
+  }
+})();
+</script>
+
+</body></html>
